@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Світ Подорожей - Все в одному</title>
+    <style>
+        /* СТИЛІ (CSS) */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* Шапка */
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: #3498db; }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: #3498db; }
+
+        /* Секції */
+        section { display: none; padding: 40px 5%; min-height: 80vh; }
+        section.active { display: block; }
+
+        /* Головна (Hero) */
+        #home {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            display: none; /* Буде активним через клас active */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #home.active { display: flex; }
+
+        .hero-title { font-size: 3.5rem; margin-bottom: 10px; }
+
+        /* Картки Напрямків */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover { transform: translateY(-10px); }
+
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+
+        .card-body { padding: 20px; }
+
+        /* Форма контактів */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button:hover { background: #2980b9; }
+
+        /* Підвал */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">МАНДРИ.UA</div>
+        <nav>
+            <a onclick="showPage('home')">Головна</a>
+            <a onclick="showPage('destinations')">Напрямки</a>
+            <a onclick="showPage('contact')">Контакти</a>
+        </nav>
+    </header>
+
+    <section id="home" class="active">
+        <h1 class="hero-title">Ваша пригода починається тут</h1>
+        <p style="font-size: 1.2rem;">Відкрийте найкращі куточки світу разом з нами</p>
+    </section>
+
+    <section id="destinations">
+        <h2 style="text-align:center;">Популярні напрямки</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" alt="Париж">
+                <div class="card-body">
+                    <h3>Париж, Франція</h3>
+                    <p>Місто кохання, вишуканої кухні та неймовірної архітектури Ейфелевої вежі.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=500" alt="Венеція">
+                <div class="card-body">
+                    <h3>Венеція, Італія</h3>
+                    <p>Унікальні канали, гондоли та романтична атмосфера старовинного міста.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500" alt="Балі">
+                <div class="card-body">
+                    <h3>Балі, Індонезія</h3>
+                    <p>Тропічний рай, екзотичні храми та найкращі пляжі для серфінгу.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 style="text-align:center;">Зв'яжіться з нами</h2>
+        <div class="contact-container">
+            <form onsubmit="event.preventDefault(); alert('Повідомлення надіслано!');">
+                <label>Ваше ім'я</label>
+                <input type="text" placeholder="Іван Іванов" required>
+                
+                <label>Ваш Email</label>
+                <input type="email" placeholder="example@mail.com" required>
+                
+                <label>Повідомлення</label>
+                <textarea rows="5" placeholder="Опишіть ваші побажання щодо туру..."></textarea>
+                
+                <button type="submit">Надіслати запит</button>
+            </form>
+            <div style="margin-top: 20px; text-align: center;">
+                <p>📍 Адреса: м. Київ, вул. Центральна, 1</p>
+                <p>📞 Телефон: +38 (044) 123-45-67</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Світ Подорожей. Всі права захищено. Автор: [Ваше Прізвище]</p>
+    </footer>
+
+    <script>
+        /* СКРИПТ ДЛЯ ПЕРЕМИКАННЯ СТОРІНОК */
+        function showPage(pageId) {
+            // Ховаємо всі секції
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            
+            // Показуємо потрібну
+            document.getElementById(pageId).classList.add('active');
+            
+            // Прокрутка вгору при зміні сторінки
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
